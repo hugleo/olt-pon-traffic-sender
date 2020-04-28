@@ -25,3 +25,14 @@ discovery[{#SNMPVALUE},.1.3.6.1.4.1.5875.800.3.9.3.4.1.2]
 O tipo de protótipo do item é Zabbix trapper com as chaves ```ifHCInOctets[{#SNMPVALUE}]``` e ```ifHCOutOctets[{#SNMPVALUE}]```
 
 Dessa forma a consulta fica muito rápida e você consegue monitorar a cada 5 minutos, obtendo assim uma visibilidade melhor do tráfego.
+
+Para ativar função na OLT:
+
+```
+cd maintenance 
+cd performance
+set mib performance switch enable
+set pon_traffic_sts switch traffic enable 5 0
+```
+
+
