@@ -3,19 +3,18 @@
 IP=$1
 HOSTNAME=$2
 BUFFERSIZE=32
+TIMESTAMP=`date +%s`
 
 # OBTEM OS INDEX OIDS DE TODAS AS PONS
-PONINDEXES=`snmpbulkwalk -m +GEPON-OLT-COMMON-MIB -Osq -c adsl -v2c $IP .1.3.6.1.4.1.5875.800.3.9.3.4.1.2 | sed -e 's/.*\.\(.*\) ".*/\1/'`
+PONINDEXES=`snmpbulkwalk -t 60 -m +GEPON-OLT-COMMON-MIB -Osq -c adsl -v2c $IP .1.3.6.1.4.1.5875.800.3.9.3.4.1.2 | sed -e 's/.*\.\(.*\) ".*/\1/'`
 
 format_snmp_get_Key_values () {
-    local TIMESTAMP=`date +%s`
     local BUF=$1
-    snmpget -Osq -c adsl -v2c $IP $BUF | sed -e "s/ /] $TIMESTAMP /g" | sed -e "s/\./[/g" | sed -e "s/^/$HOSTNAME /" | sed -e "s/ /\" \"/g" | sed 's/\(.*\)/"\1"/g'
+    snmpget -t 60 -Osq -c adsl -v2c $IP $BUF | sed -e "s/ /] $TIMESTAMP /g" | sed -e "s/\./[/g" | sed -e "s/^/$HOSTNAME /" | sed -e "s/ /\" \"/g" | sed 's/\(.*\)/"\1"/g'
     sleep 1
 }
 
 format_buffer_snmp_Key_values () {
-    local TIMESTAMP=`date +%s`
     local i=0
     local BUFFER=""
 

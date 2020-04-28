@@ -1,0 +1,8 @@
+[Unit]
+Description=olt-pon-traffic-sender
+
+[Service]
+Type=simple
+User=ths
+ExecStart=/bin/bash -c '/usr/bin/zabbix_sender -z localhost -p 10051 -T -i <(/usr/share/zabbix/externalscripts/olt-pon-traffic-sender.sh 192.168.0.1 OLT-TESTE) || true'
+StandardOutput=null
