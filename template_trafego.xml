@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.4</version>
-    <date>2020-04-28T12:58:30Z</date>
+    <date>2020-04-29T12:32:36Z</date>
     <groups>
         <group>
             <name>FiberHome</name>
@@ -12,8 +12,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template TRAFEGO FIBERHOME</template>
-            <name>Template TRAFEGO FIBERHOME</name>
+            <template>Template TRAFEGO PON FIBERHOME</template>
+            <name>Template TRAFEGO PON FIBERHOME</name>
             <groups>
                 <group>
                     <name>FiberHome</name>
@@ -23,6 +23,9 @@
                 </group>
             </groups>
             <applications>
+                <application>
+                    <name>ONU</name>
+                </application>
                 <application>
                     <name>PON</name>
                 </application>
@@ -51,6 +54,11 @@
                             </applications>
                             <preprocessing>
                                 <step>
+                                    <type>NOT_MATCHES_REGEX</type>
+                                    <params>^0$</params>
+                                    <error_handler>DISCARD_VALUE</error_handler>
+                                </step>
+                                <step>
                                     <type>CHANGE_PER_SECOND</type>
                                     <params/>
                                 </step>
@@ -59,8 +67,13 @@
                                     <params>8</params>
                                 </step>
                                 <step>
-                                    <type>DISCARD_UNCHANGED_HEARTBEAT</type>
-                                    <params>13m</params>
+                                    <type>DISCARD_UNCHANGED</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>NOT_MATCHES_REGEX</type>
+                                    <params>^0$</params>
+                                    <error_handler>DISCARD_VALUE</error_handler>
                                 </step>
                             </preprocessing>
                         </item_prototype>
@@ -78,6 +91,11 @@
                             </applications>
                             <preprocessing>
                                 <step>
+                                    <type>NOT_MATCHES_REGEX</type>
+                                    <params>^0$</params>
+                                    <error_handler>DISCARD_VALUE</error_handler>
+                                </step>
+                                <step>
                                     <type>CHANGE_PER_SECOND</type>
                                     <params/>
                                 </step>
@@ -86,8 +104,13 @@
                                     <params>8</params>
                                 </step>
                                 <step>
-                                    <type>DISCARD_UNCHANGED_HEARTBEAT</type>
-                                    <params>13m</params>
+                                    <type>DISCARD_UNCHANGED</type>
+                                    <params/>
+                                </step>
+                                <step>
+                                    <type>NOT_MATCHES_REGEX</type>
+                                    <params>^0$</params>
+                                    <error_handler>DISCARD_VALUE</error_handler>
                                 </step>
                             </preprocessing>
                         </item_prototype>
@@ -101,7 +124,7 @@
                                     <drawtype>GRADIENT_LINE</drawtype>
                                     <color>00AA00</color>
                                     <item>
-                                        <host>Template TRAFEGO FIBERHOME</host>
+                                        <host>Template TRAFEGO PON FIBERHOME</host>
                                         <key>ifHCInOctets[{#SNMPINDEX}]</key>
                                     </item>
                                 </graph_item>
@@ -110,7 +133,7 @@
                                     <drawtype>GRADIENT_LINE</drawtype>
                                     <color>3333FF</color>
                                     <item>
-                                        <host>Template TRAFEGO FIBERHOME</host>
+                                        <host>Template TRAFEGO PON FIBERHOME</host>
                                         <key>ifHCOutOctets[{#SNMPINDEX}]</key>
                                     </item>
                                 </graph_item>
